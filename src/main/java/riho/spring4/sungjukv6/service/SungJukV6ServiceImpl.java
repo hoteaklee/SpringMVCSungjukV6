@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import riho.spring4.sungjukv6.dao.SungJukV4DAO;
-import riho.spring4.sungjukv6.dao.SungJukV6DAOImpl;
 import riho.spring4.sungjukv6.model.SungJukVO;
 
 import java.util.List;
@@ -32,7 +31,8 @@ public class SungJukV6ServiceImpl implements SungJukV6Service {
     }
 
     public SungJukVO readOneSungJuk(int sjno) {
-        return null;
+
+        return sjdao.seletOneSungJuk(sjno);
     }
 
     // 성적 리스트 받아옴 (이름,국어,영어,수학)
