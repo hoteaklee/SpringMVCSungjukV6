@@ -1,5 +1,7 @@
 package riho.spring4.sungjukv6.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +15,9 @@ import java.util.List;
 
 @Repository("sjdao")
 public class SungJukV6DAOImpl implements SungJukV4DAO {
+
+    private static final Logger logger = LogManager.getLogger(SungJukV6DAOImpl.class);
+    // debug, info, warn , error, fatal   // 인포 아니면 에러 많이씀
     private JdbcTemplate jdbcTemplate;
 
     // jdbc.properties 에 정의한 SQL 가져오기
@@ -38,12 +43,12 @@ public class SungJukV6DAOImpl implements SungJukV4DAO {
             //매개변수 정의
             Object[] params = new Object[]{
                     sj.getName(),sj.getKor(),sj.getEng(),sj.getMat(),
-                    sj.getTot(),sj.getAvg(), sj.getGrd()//+""
+                    sj.getTot(),sj.getAvg(), sj.getGrd()+""
             };
             cnt = jdbcTemplate.update(insertSQL,params);
         } catch (Exception ex){
-            System.out.println("insertSungJuk 오류");
-            ex.printStackTrace();
+            logger.error("insertSungJuk 오류");
+            logger.info(ex.getMessage());
         }
 
         return cnt;

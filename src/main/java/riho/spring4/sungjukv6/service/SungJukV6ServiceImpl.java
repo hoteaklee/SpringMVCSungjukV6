@@ -1,16 +1,19 @@
 package riho.spring4.sungjukv6.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import riho.spring4.sungjukv6.dao.SungJukV4DAO;
+import riho.spring4.sungjukv6.dao.SungJukV6DAOImpl;
 import riho.spring4.sungjukv6.model.SungJukVO;
 
 import java.util.List;
 
 @Service("sjsrv")
 public class SungJukV6ServiceImpl implements SungJukV6Service {
-    private List<SungJukVO> sjs = null;
     private SungJukV4DAO sjdao = null;
+    private static final Logger logger = LogManager.getLogger(SungJukV6ServiceImpl.class);
 
 
     @Autowired
@@ -43,6 +46,8 @@ public class SungJukV6ServiceImpl implements SungJukV6Service {
         boolean result = false;
 
         this.computeSungJuk(sj);
+        logger.info(sj);    //잘넘어오는지 확인
+
         if (sjdao.insertSungJuk(sj) > 0) result = true;
         return result;
     }
