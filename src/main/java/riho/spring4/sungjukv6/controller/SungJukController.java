@@ -51,7 +51,7 @@ public class SungJukController {
 
     //  성적 본문조회 처리
     @GetMapping("/view")
-    public ModelAndView view(@RequestParam int sjno){
+    public ModelAndView view(@RequestParam int sjno){   //@RequestParam 생략가능
         ModelAndView mv = new ModelAndView();
         String view = "sungjukfail";
 
@@ -63,5 +63,17 @@ public class SungJukController {
         mv.setViewName(view);
 
         return mv;
+    }
+
+    //성적 수정
+
+    //성적 삭제
+    @GetMapping("/remove")
+    public String remove(int sjno){
+
+        sjsrv.removeSungJuk(sjno);
+
+        // redirect 는 클라이언트에게 /list를 서버에 요청하도록 지시
+        return "redirect:/list";
     }
 }
