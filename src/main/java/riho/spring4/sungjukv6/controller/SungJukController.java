@@ -66,6 +66,20 @@ public class SungJukController {
     }
 
     //성적 수정
+    @GetMapping("/modify")
+    public ModelAndView modify(@RequestParam int sjno){
+        ModelAndView mv = new ModelAndView();
+
+        mv.addObject("sj", sjsrv.readOneSungJuk(sjno) );
+        mv.setViewName("sjmodify");
+
+        return mv;
+    }
+    @PostMapping("/modify")
+    public ModelAndView modifyok(){
+
+        return null;
+    }
 
     //성적 삭제
     @GetMapping("/remove")
@@ -77,3 +91,5 @@ public class SungJukController {
         return "redirect:/list";
     }
 }
+
+
