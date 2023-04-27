@@ -76,9 +76,13 @@ public class SungJukController {
         return mv;
     }
     @PostMapping("/modify")
-    public ModelAndView modifyok(){
-
-        return null;
+    public ModelAndView modifyok(SungJukVO sj){
+        ModelAndView mv = new ModelAndView();
+        String view = "sungjukfail";
+        if (sjsrv.modifySungJuk(sj))
+            view = "redirect:/view?sjno=" + sj.getSjno();
+        mv.setViewName(view);
+        return mv;
     }
 
     //성적 삭제
